@@ -64,6 +64,12 @@ public class ApiUtil {
                     Scanner scanner = new Scanner(System.in);;
                     String text = scanner.nextLine().trim();
                     if (text.equals(String.valueOf(1))) {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("userId", ApiUtil.userId);
+                        JSONObject jsonObject = sendApiGetRequest("/fm1/next-level", params);
+                        if (jsonObject != null) {
+                            System.out.println(jsonObject.getString("message"));
+                        }
                     } else if (text.equals(String.valueOf(2))) {
                         System.out.println("Ok, try again");
                         System.exit(1);

@@ -28,7 +28,7 @@ public class ApiUtil {
             String json = gson.toJson(riverList);
 
             // The rest is the same as before
-            URL url = new URL("http://localhost:9030/fm1/send-data?userId=" + ApiUtil.userId);
+            URL url = new URL(Constants.REST_DOMAIN + "/fm1/send-data?userId=" + ApiUtil.userId);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");

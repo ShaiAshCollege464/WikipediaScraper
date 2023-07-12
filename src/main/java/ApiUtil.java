@@ -49,13 +49,24 @@ public class ApiUtil {
             try {
                 RiversResponseModel riversResponseModel = new ObjectMapper().readValue(content.toString(), RiversResponseModel.class);
                 System.out.println("Total matches: " + riversResponseModel.getMatched());
-                System.out.println("Non matched: ");
-                int printSize = 10;
-                riversResponseModel.getRiverList()
-                        .stream()
-                        .limit(printSize)
-                        .forEach(river -> System.out.println(river.getName()));
-                System.out.println("and " + (riversResponseModel.getRiverList().size() - printSize) + " more");
+                if (!riversResponseModel.getRiverList().isEmpty()) {
+                    System.out.println("Non matched: ");
+                    int printSize = 10;
+                    if (riversResponseModel.getRiverList().size() > printSize) {
+                        riversResponseModel.getRiverList()
+                                .stream()
+                                .limit(printSize)
+                                .forEach(river -> System.out.println(river.getName()));
+                        System.out.println("and " + (riversResponseModel.getRiverList().size() - printSize) + " more");
+                    } else {
+                        riversResponseModel.getRiverList()
+                                .stream()
+                                .limit(printSize)
+                                .forEach(river -> System.out.println(river.getName()));
+                    }
+                } else {
+                    System.out.println("Great job!!");
+                }
                 if (riversResponseModel.getMatched() >= 50) {
                     System.out.println("Would you like to continue to the next task? 1 - for YES, 2 - for NO ");
                     Scanner scanner = new Scanner(System.in);;
